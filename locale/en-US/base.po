@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "SMS bei Lagerausgang?"
+msgstr "SMS on dispatch?"
+
+msgid "activeCustomers"
+msgstr "Only active customers"
+
+msgid "customerFilters"
+msgstr "Customer filters"
+
+msgid "messageSettings"
+msgstr "Message settings"
+
+msgid "recipients"
+msgstr "Recipient(s)"
+
+msgid "label"
+msgstr "Label"
+
+msgid "labelDescription"
+msgstr "Custom value for analytics - max. 100 chars consisting of a-z, A-Z, 0-9, .-_@"
+
+msgid "foreignId"
+msgstr "Foreign ID"
+
+msgid "foreignIdDescription"
+msgstr "Custom value returned in callbacks - max. 64 chars consisting of  a-z, A-Z, 0-9, .-_@"
+
+msgid "flash"
+msgstr "Flash"
+
+msgid "flashDescription"
+msgstr "Show directly in the display and doesn't get saved - depending on the phone model"
+
+msgid "debug"
+msgstr "Debug"
+
+msgid "debugDescription"
+msgstr "Validates the configuration but doesn't actually send messages"
+
+msgid "delay"
+msgstr "Delay"
+
+msgid "delayDescription"
+msgstr "Set date/time for delayed dispatch - choose between Unix timestamp or formatted as yyyy-mm-dd hh:ii"
+
+msgid "performanceTracking"
+msgstr "Performance Tracking"
+
+msgid "performanceTrackingDescription"
+msgstr "Tracks clicks and performance for URLs found in the SMS text"
+
+msgid "noReload"
+msgstr "Deactivate reload lock"
+
+msgid "noReloadDescription"
+msgstr "Allow sending duplicated SMS - text and recipient alike within 180 seconds. Can be permanently set in the sms77 dashboard"
+
+msgid "missingApiKey"
+msgstr "Please set an API key in the settings tab"
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "Voice"
+msgstr "Voice Call"
+
+msgid "Deaktiviert"
+msgstr "Deactivated"
+
+msgid "msgType"
+msgstr "Message Type"
+
+msgid "xml"
+msgstr "XML"
+
+msgid "xmlDescription"
+msgstr "Enable if text is of XML format"
