@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<jtlshopplugin>
+    <Name>sms77</Name>
+    <Description>Programmatically send SMS and make text-to-speech calls.</Description>
+    <Author>sms77 e.K.</Author>
+    <URL>https://www.sms77.io</URL>
+    <XMLVersion>101</XMLVersion>
+    <ShopVersion>5.0.0</ShopVersion>
+    <PluginID>sms77_jtl5</PluginID>
+    <CreateDate>2021-10-12</CreateDate>
+    <Version>1.0.0</Version>
+    <Install>
+        <Adminmenu>
+            <Customlink sort="1">
+                <Name>Massenversand</Name>
+                <Filename>bulk.php</Filename>
+            </Customlink>
+
+            <Settingslink sort="2">
+                <Name>Einstellungen</Name>
+
+                <Setting type="text" conf="N" initialValue="Y" sort="0">
+                    <Name>Generell</Name>
+                    <Description>Generelle Plugin-Einstellungen</Description>
+                    <ValueName>h0</ValueName>
+                </Setting>
+
+                <Setting type="password" initialValue="" sort="1" conf="Y">
+                    <Name>Schnittstellenschlüssel</Name>
+                    <Description>Füge hier deinen sms77 Schnittstellenschlüssel ein</Description>
+                    <ValueName>apiKey</ValueName>
+                </Setting>
+
+                <Setting type="text" conf="N" initialValue="Y" sort="2">
+                    <Name>Events</Name>
+                    <Description>Event-bezogene Plugin-Einstellungen</Description>
+                    <ValueName>h1</ValueName>
+                </Setting>
+
+                <Setting type="radio" initialValue="0" sort="3" conf="Y">
+                    <Name>Nachricht bei Lagerausgang?</Name>
+                    <Description>Soll bei erfolgtem Lagerausgang eine Nachricht an den Kunden erfolgen?</Description>
+                    <ValueName>onShipping</ValueName>
+                    <OptionsSource>
+                        <File>messageTypes.php</File>
+                    </OptionsSource>
+                </Setting>
+
+                <Setting type="radio" initialValue="0" sort="4" conf="Y">
+                    <Name>Nachricht bei partiellem Lagerausgang?</Name>
+                    <Description>Soll bei teilweise erfolgtem Lagerausgang eine Nachricht an den Kunden erfolgen?</Description>
+                    <ValueName>onPartialShipping</ValueName>
+                    <OptionsSource>
+                        <File>messageTypes.php</File>
+                    </OptionsSource>
+                </Setting>
+
+                <Setting type="radio" initialValue="0" sort="5" conf="Y">
+                    <Name>Nachricht bei Stornierung?</Name>
+                    <Description>Soll bei Stornierung einer Bestellung eine Nachricht an den Kunden erfolgen?</Description>
+                    <ValueName>onCancel</ValueName>
+                    <OptionsSource>
+                        <File>messageTypes.php</File>
+                    </OptionsSource>
+                </Setting>
+
+                <Setting type="radio" initialValue="0" sort="6" conf="Y">
+                    <Name>Nachricht bei Bestellung?</Name>
+                    <Description>Soll bei Bestellung eine Nachricht an den Kunden erfolgen?</Description>
+                    <ValueName>onOrder</ValueName>
+                    <OptionsSource>
+                        <File>messageTypes.php</File>
+                    </OptionsSource>
+                </Setting>
+
+                <Setting type="radio" initialValue="0" sort="7" conf="Y">
+                    <Name>SMS bei Bezahlung?</Name>
+                    <Description>Soll bei Zahlungseingang eine SMS an den Kunden erfolgen?</Description>
+                    <ValueName>onPayment</ValueName>
+                    <OptionsSource>
+                        <File>messageTypes.php</File>
+                    </OptionsSource>
+                </Setting>
+            </Settingslink>
+        </Adminmenu>
+
+        <Locales>
+            <Variable>
+                <Name>text_on_shipment</Name>
+                <Description>SMS text content sent on a triggered shipment.</Description>
+                <VariableLocalized iso="GER">
+                    Ihre Bestellung wurde soeben versendet. Für weitere Informationen, loggen Sie sich bitte in Ihr Benutzerkonto ein. Beste Grüße!
+                </VariableLocalized>
+                <VariableLocalized iso="ENG">
+                    Your order has been shipped. Log in to your customer account for more information. Best regards!
+                </VariableLocalized>
+                <Type>textarea</Type>
+            </Variable>
+
+            <Variable>
+                <Name>text_on_partial_shipment</Name>
+                <Description>SMS text content sent on a triggered partial shipment.</Description>
+                <VariableLocalized iso="GER">
+                    Ein Teil Ihrer Bestellung wurde soeben versendet. Für weitere Informationen, loggen Sie sich bitte in Ihr Benutzerkonto ein. Beste Grüße!
+                </VariableLocalized>
+                <VariableLocalized iso="ENG">
+                    Your order has been partially shipped. Log in to your customer account for more information. Best regards!
+                </VariableLocalized>
+                <Type>textarea</Type>
+            </Variable>
+
+            <Variable>
+                <Name>text_on_cancel</Name>
+                <Description>SMS text content sent on a cancelled shipment.</Description>
+                <VariableLocalized iso="GER">
+                    Ihre Bestellung wurde soeben storniert. Für weitere Informationen, loggen Sie sich bitte in Ihr Benutzerkonto ein. Beste Grüße!
+                </VariableLocalized>
+                <VariableLocalized iso="ENG">
+                    Your order has been cancelled. Log in to your customer account for more information. Best regards!
+                </VariableLocalized>
+                <Type>textarea</Type>
+            </Variable>
+
+            <Variable>
+                <Name>text_on_order</Name>
+                <Description>SMS text content sent on a new order.</Description>
+                <VariableLocalized iso="GER">
+                    Danke für Ihre Bestellung. Wir halten Sie auf dem Laufenden über Aktualisierungen. Beste Grüße!
+                </VariableLocalized>
+                <VariableLocalized iso="ENG">
+                    Thanks for your order. We will make sure to keep you up to date. Best regards!
+                </VariableLocalized>
+                <Type>textarea</Type>
+            </Variable>
+
+            <Variable>
+                <Name>text_on_payment</Name>
+                <Description>SMS text content sent on a new payment.</Description>
+                <VariableLocalized iso="GER">
+                    Danke für Ihre Bezahlung. Wir informieren Sie sobald die Ware unser Lager verlässt. Beste Grüße!
+                </VariableLocalized>
+                <VariableLocalized iso="ENG">
+                    Thanks for your payment. We will inform you as soon as the order leaves our warehouse. Best regards!
+                </VariableLocalized>
+                <Type>textarea</Type>
+            </Variable>
+        </Locales>
+    </Install>
+</jtlshopplugin>
