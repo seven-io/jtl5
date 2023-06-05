@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright 2021 sms77 e.K.
- * @link https://www.sms77.io
+ * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
+ * @link https://www.seven.io
  */
 
-namespace Plugin\sms77_jtl5;
+namespace Plugin\seven_jtl5;
 
 use JTL\Events\Dispatcher;
 use JTL\Plugin\Bootstrapper;
-use Plugin\sms77_jtl5\lib\Hook\PostCancelOrder;
-use Plugin\sms77_jtl5\lib\Hook\PostChangeOrder;
-use Plugin\sms77_jtl5\lib\Hook\PostSaveOrder;
-use Plugin\sms77_jtl5\lib\MessageType;
+use Plugin\seven_jtl5\lib\Hook\PostCancelOrder;
+use Plugin\seven_jtl5\lib\Hook\PostChangeOrder;
+use Plugin\seven_jtl5\lib\Hook\PostSaveOrder;
+use Plugin\seven_jtl5\lib\MessageType;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

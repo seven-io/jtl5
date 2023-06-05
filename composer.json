@@ -1,32 +1,32 @@
 {
     "autoload": {
         "psr-4": {
-            "Plugin\\sms77_jtl5\\lib\\": "./lib"
+            "Plugin\\seven_jtl5\\lib\\": "./lib"
         }
     },
     "authors": [
         {
-            "email": "support@sms77.io",
-            "homepage": "https://www.sms77.io",
-            "name": "sms77 e.K."
+            "email": "support@seven.io",
+            "homepage": "https://www.seven.io",
+            "name": "seven communications GmbH & Co. KG"
         }
     ],
     "config": {
         "optimize-autoloader": true,
         "sort-packages": true
     },
-    "description": "sms77.io plugin for JTL-Shop 5.x applications.",
-    "homepage": "https://www.sms77.io",
-    "name": "sms77/jtl5",
+    "description": "seven.io plugin for JTL-Shop 5.x applications.",
+    "homepage": "https://www.seven.io",
+    "name": "seven.io/jtl5",
     "require": {
         "php": ">=7.3.0",
         "sms77/api": "v2.5.0"
     },
     "support": {
-        "email": "support@sms77.io",
-        "issues": "https://github.com/sms77io/jtl5/issues",
-        "source": "https://github.com/sms77io/jtl5",
-        "wiki": "https://github.com/sms77io/jtl5/wiki"
+        "email": "support@seven.io",
+        "issues": "https://github.com/seven-io/jtl5/issues",
+        "source": "https://github.com/seven-io/jtl5",
+        "wiki": "https://github.com/seven-io/jtl5/wiki"
     },
     "type": "project"
 }

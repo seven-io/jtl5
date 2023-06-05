@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <jtlshopplugin>
-    <Name>sms77</Name>
+    <Name>seven</Name>
     <Description>Programmatically send SMS and make text-to-speech calls.</Description>
-    <Author>sms77 e.K.</Author>
-    <URL>https://www.sms77.io</URL>
+    <Author>seven communications GmbH &amp; Co. KG</Author>
+    <URL>https://www.seven.io</URL>
     <XMLVersion>101</XMLVersion>
     <ShopVersion>5.0.0</ShopVersion>
-    <PluginID>sms77_jtl5</PluginID>
-    <CreateDate>2021-10-12</CreateDate>
+    <PluginID>seven_jtl5</PluginID>
+    <CreateDate>2023-06-05</CreateDate>
     <Version>1.0.0</Version>
     <Install>
         <Adminmenu>
@@ -27,7 +27,7 @@
 
                 <Setting type="password" initialValue="" sort="1" conf="Y">
                     <Name>Schnittstellenschlüssel</Name>
-                    <Description>Füge hier deinen sms77 Schnittstellenschlüssel ein</Description>
+                    <Description>Füge hier deinen seven Schnittstellenschlüssel ein</Description>
                     <ValueName>apiKey</ValueName>
                 </Setting>
 

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright 2021 sms77 e.K.
- * @link https://www.sms77.io
+ * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
+ * @link https://www.seven.io
  */
 
-namespace Plugin\sms77_jtl5\lib;
+namespace Plugin\seven_jtl5\lib;
 
 use Exception;
 use Illuminate\Support\Collection;
@@ -18,7 +18,7 @@ use Sms77\Api\Params\VoiceParams;
 
 abstract class FormHelper {
     public static function getApiKey(): ?string {
-        return Helper::getPluginById('sms77_jtl5')->getConfig()->getValue('apiKey');
+        return Helper::getPluginById('seven_jtl5')->getConfig()->getValue('apiKey');
     }
 
     public static function initClient(string $apiKey = null): Client {

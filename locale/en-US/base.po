@@ -66,7 +66,7 @@ msgid "noReload"
 msgstr "Deactivate reload lock"
 
 msgid "noReloadDescription"
-msgstr "Allow sending duplicated SMS - text and recipient alike within 180 seconds. Can be permanently set in the sms77 dashboard"
+msgstr "Allow sending duplicated SMS - text and recipient alike within 180 seconds. Can be permanently set in the seven dashboard"
 
 msgid "missingApiKey"
 msgstr "Please set an API key in the settings tab"

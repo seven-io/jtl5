@@ -1,24 +1,24 @@
 <?php
 
 /**
- * @copyright 2021 sms77 e.K.
- * @link https://www.sms77.io
+ * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
+ * @link https://www.seven.io
  */
 
-namespace Plugin\sms77_jtl5\lib\Hook;
+namespace Plugin\seven_jtl5\lib\Hook;
 
 use JTL\Plugin\Helper;
 use JTL\Plugin\PluginInterface;
 use JTL\Shop;
-use Plugin\sms77_jtl5\lib\FormHelper;
-use Plugin\sms77_jtl5\lib\MessageType;
+use Plugin\seven_jtl5\lib\FormHelper;
+use Plugin\seven_jtl5\lib\MessageType;
 use Sms77\Api\Client;
 use Sms77\Api\Params\SmsParams;
 use Sms77\Api\Params\VoiceParams;
 
 abstract class AbstractHook {
     protected static function getPlugin(): PluginInterface {
-        return Helper::getPluginById('sms77_jtl5');
+        return Helper::getPluginById('seven_jtl5');
     }
 
     protected static function trans(string $key, string $lang = null): ?string {
@@ -31,13 +31,13 @@ abstract class AbstractHook {
         $logger = Shop::Container()->getLogService();
 
         if (!$apiKey) {
-            $logger->notice('sms77.missing.apiKey.for.sending.msg.' . $setting);
+            $logger->notice('seven.missing.apiKey.for.sending.msg.' . $setting);
             return;
         }
 
         $phone = FormHelper::getCustomerPhone($customer);
         if ('' === $phone) {
-            $logger->notice('sms77.missing.phone.for.sending.msg.' . $setting);
+            $logger->notice('seven.missing.phone.for.sending.msg.' . $setting);
             return;
         }
 
@@ -62,7 +62,7 @@ abstract class AbstractHook {
             FormHelper::replacePlaceholders($text,
                 FormHelper::parsePlaceholders(self::trans($text)), $customer));
 
-        $logger->notice('sms77.msg.sent.' . $setting,
+        $logger->notice('seven.msg.sent.' . $setting,
             (array)$request(FormHelper::initClient($apiKey), $params));
     }
 }

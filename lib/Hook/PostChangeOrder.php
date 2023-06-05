@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright 2021 sms77 e.K.
- * @link https://www.sms77.io
+ * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
+ * @link https://www.seven.io
  */
 
-namespace Plugin\sms77_jtl5\lib\Hook;
+namespace Plugin\seven_jtl5\lib\Hook;
 
 use Exception;
 use JTL\Checkout\Bestellung;

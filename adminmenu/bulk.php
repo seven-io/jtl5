@@ -1,7 +1,7 @@
 <?php
 
 use JTL\Helpers\Form;
-use Plugin\sms77_jtl5\lib\FormHelper;
+use Plugin\seven_jtl5\lib\FormHelper;
 
 $messages = [];
 
