@@ -66,7 +66,6 @@ abstract class FormHelper {
         $text = $_POST['text'];
         $isSMS = 'sms' === $_POST['msgType'];
         $param = ($isSMS ? self::buildBaseSmsParams() : self::buildBaseVoiceParams())
-            ->setDebug(isset($_POST['debug']))
             ->setFrom($_POST['from']);
 
         $params = [];

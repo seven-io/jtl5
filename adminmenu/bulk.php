@@ -110,22 +110,6 @@ if (isset($_POST['msgType']) && Form::validateToken()) {
             </div>
         </div>
 
-        <div class='form-group form-row align-items-center'>
-            <label class='col col-sm-4 col-form-label text-sm-right' for='debug'
-                   data-toggle='tooltip' data-placement='left'
-                   title='<?= __('debugDescription') ?>'>
-                <?= __('debug') ?></label>
-            <div class='col-sm pl-sm-3 pr-sm-5 order-last order-sm-2'>
-                <div class='custom-control custom-checkbox'>
-                    <input class='custom-control-input' name='debug'
-                           id='debug' type='checkbox'
-                    />
-
-                    <label class='custom-control-label' for='debug'></label>
-                </div>
-            </div>
-        </div>
-
         <div class='form-group form-row align-items-center' id='wrapFlash'>
             <label class='col col-sm-4 col-form-label text-sm-right' for='flash'
                    data-toggle='tooltip' data-placement='left'

@@ -44,12 +44,6 @@ msgstr "Flash"
 msgid "flashDescription"
 msgstr "Wird direkt im Display angezeigt und nicht gespeichert - geräteabhängig"
 
-msgid "debug"
-msgstr "Debug"
-
-msgid "debugDescription"
-msgstr "Prüft nur die Konfiguration, sendet aber keine Nachrichten"
-
 msgid "delay"
 msgstr "Versandzeitpunkt"
 

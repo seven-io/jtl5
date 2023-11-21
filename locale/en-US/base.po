@@ -44,12 +44,6 @@ msgstr "Flash"
 msgid "flashDescription"
 msgstr "Show directly in the display and doesn't get saved - depending on the phone model"
 
-msgid "debug"
-msgstr "Debug"
-
-msgid "debugDescription"
-msgstr "Validates the configuration but doesn't actually send messages"
-
 msgid "delay"
 msgstr "Delay"
 
