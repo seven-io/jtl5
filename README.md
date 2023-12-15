@@ -1,4 +1,5 @@
-![](https://www.seven.io/wp-content/uploads/Logo.svg "seven Logo")
+<img src="https://www.seven.io/wp-content/uploads/Logo.svg" width="250" />
+
 
 # JTL-Shop 5.x Plugin
 *You can download the latest version [here](https://github.com/seven-io/jtl5) for free.*
