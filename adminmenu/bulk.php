@@ -142,21 +142,6 @@ if (isset($_POST['msgType']) && Form::validateToken()) {
             </div>
         </div>
 
-        <div class='form-group form-row align-items-center d-none' id='wrapXml'>
-            <label class='col col-sm-4 col-form-label text-sm-right' for='xml'
-                   data-toggle='tooltip' data-placement='left'
-                   title='<?= __('xmlDescription') ?>'>
-                <?= __('xml') ?></label>
-            <div class='col-sm pl-sm-3 pr-sm-5 order-last order-sm-2'>
-                <div class='custom-control custom-checkbox'>
-                    <input class='custom-control-input' name='xml' id='xml'
-                           type='checkbox'/>
-
-                    <label class='custom-control-label' for='xml'></label>
-                </div>
-            </div>
-        </div>
-
         <div class='form-group form-row align-items-center' id='wrapDelay'>
             <label class='col col-sm-4 col-form-label text-sm-right' for='delay'
                    data-toggle='tooltip' data-placement='left'
@@ -238,7 +223,7 @@ if (isset($_POST['msgType']) && Form::validateToken()) {
         document.getElementById('wrapForeignId'),
         document.getElementById('wrapLabel'),
     ]
-    const voiceInputs = [document.getElementById('wrapXml')]
+    const voiceInputs = []
     const text = document.getElementById('text')
 
     Array.from(document.querySelectorAll('input[name="msgType"]'))
