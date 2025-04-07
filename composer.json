@@ -20,7 +20,8 @@
     "name": "seven.io/jtl5",
     "require": {
         "php": ">=7.3.0",
-        "sms77/api": "v2.5.0"
+        "sms77/api": "v2.5.0",
+        "ext-json": "*"
     },
     "support": {
         "email": "support@seven.io",
