@@ -1,44 +1,47 @@
 <?php
 
-/**
- * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
- * @link https://www.seven.io
- */
-
 namespace Plugin\seven_jtl5\lib;
 
 use Exception;
 use Illuminate\Support\Collection;
 use JTL\Plugin\Helper;
-use Kunde;
-use Shop;
-use Sms77\Api\Client;
-use Sms77\Api\Params\SmsParams;
-use Sms77\Api\Params\VoiceParams;
+use JTL\Customer\Customer;
+use JTL\Shop;
 
 abstract class FormHelper {
     public static function getApiKey(): ?string {
         return Helper::getPluginById('seven_jtl5')->getConfig()->getValue('apiKey');
     }
 
-    public static function initClient(string $apiKey = null): Client {
-        return new Client($apiKey ?: self::getApiKey(), 'JTL');
-    }
-
-    /**
-     * @param string $apiKey
-     * @param array $params
-     * @return array
-     */
-    public static function sendBulk(string $apiKey, array $params): array {
+    public static function sendBulk(string $apiKey, array $params, string $msgType): array {
         $messages = [];
-        $client = self::initClient($apiKey);
 
         foreach ($params as $p) {
             try {
-                $json = $p instanceof SmsParams ? $client->smsJson($p)
-                    : $client->voiceJson($p);
-                $messages[] = json_encode($json, JSON_PRETTY_PRINT);
+                switch ($msgType) {
+                    case 'sms':
+                        $endpoint = 'sms';
+                        break;
+                    case 'voice':
+                        $endpoint = 'voice';
+                        break;
+                    default:
+                        return [];  // TODO: alert or whatever
+                }
+
+                $ch = curl_init('https://gateway.seven.io/api/' . $endpoint);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($p));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    'Accept: application/json',
+                    'Content-type: application/json',
+                    'SentWith: JTL',
+                    'X-Api-Key: ' . $apiKey
+                ]);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                curl_close($ch);
+
+                $messages[] = json_encode($result, JSON_PRETTY_PRINT);
             } catch (Exception $e) {
                 $messages[] = $e->getMessage();
             }
@@ -47,26 +50,25 @@ abstract class FormHelper {
         return $messages;
     }
 
-    private static function buildBaseSmsParams(): SmsParams {
-        return (new SmsParams)
-            ->setDelay($_POST['delay'])
-            ->setFlash(isset($_POST['flash']))
-            ->setForeignId($_POST['foreignId'])
-            ->setLabel($_POST['label'])
-            ->setNoReload(isset($_POST['noReload']))
-            ->setPerformanceTracking(isset($_POST['performanceTracking']));
+    private static function buildBaseSmsParams(): array {
+        return [
+            'delay' => $_POST['delay'] ?? '',
+            'flash' => intval($_POST['flash'] ?? 0),
+            'foreign_id' => $_POST['foreignId'] ?? '',
+            'label' => $_POST['label'] ?? '',
+            'performance_tracking' =>intval($_POST['performanceTracking'] ?? 0),
+        ];
     }
 
-    private static function buildBaseVoiceParams(): VoiceParams {
-        return (new VoiceParams)->setXml(isset($_POST['xml']));
+    private static function buildBaseVoiceParams(): array {
+        return [];
     }
 
     public static function buildBulkParams(): array {
         $customers = self::getCustomers();
         $text = $_POST['text'];
         $isSMS = 'sms' === $_POST['msgType'];
-        $param = ($isSMS ? self::buildBaseSmsParams() : self::buildBaseVoiceParams())
-            ->setFrom($_POST['from']);
+        $param = [...$isSMS ? self::buildBaseSmsParams() : self::buildBaseVoiceParams(), 'from' => $_POST['from']];
 
         $params = [];
 
@@ -76,20 +78,29 @@ abstract class FormHelper {
             if (empty($matches)) {
                 $to = [];
 
-                foreach ($customers as $c) $to[] = FormHelper::getCustomerPhone($c);
+                foreach ($customers as $c) {
+                    $to[] = FormHelper::getCustomerPhone($c);
+                }
 
-                foreach ($isSMS ? [implode(',', $to)] : $to as $t)
-                    $params[] = (clone $param)->setText($text)->setTo($t);
-            } else foreach ($customers as $c) $params[] = (clone $param)
-                ->setText(FormHelper::replacePlaceholders($text, $matches, $c))
-                ->setTo(FormHelper::getCustomerPhone($c));
-        } else $params[] = (clone $param)->setText($text)->setTo($_POST['to']);
+                foreach ($isSMS ? [implode(',', $to)] : $to as $t) {
+                    $params[] = [...$param, 'text' => $text, 'to' => $t];
+                }
+            } else {
+                foreach ($customers as $c) {
+                    $params[] = [
+                         ...$param,
+                        'text' => FormHelper::replacePlaceholders($text, $matches, $c),
+                        'to' => FormHelper::getCustomerPhone($c)
+                    ];
+                }
+            }
+        } else $params[] = [...$param, 'text' => $text, 'to' => $_POST['to']];
 
         return $params;
     }
 
     /**
-     * @return Kunde[]|Collection
+     * @return Customer[]|Collection
      */
     public static function getCustomers(): Collection {
         $stmt = 'SELECT * FROM tkunde WHERE (cMobil<>"" OR cTel<>"")';
@@ -116,7 +127,7 @@ abstract class FormHelper {
     }
 
     public static function getCustomerPhone(object $customer): string {
-        /** @var Kunde $customer */
+        /** @var Customer $customer */
         return '' === $customer->cMobil ? $customer->cTel : $customer->cMobil;
     }
 

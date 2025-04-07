@@ -4,16 +4,15 @@
     <Description>Programmatically send SMS and make text-to-speech calls.</Description>
     <Author>seven communications GmbH &amp; Co. KG</Author>
     <URL>https://www.seven.io</URL>
-    <XMLVersion>101</XMLVersion>
+    <XMLVersion>100</XMLVersion>
     <ShopVersion>5.0.0</ShopVersion>
     <PluginID>seven_jtl5</PluginID>
-    <CreateDate>2023-06-05</CreateDate>
+    <CreateDate>2025-10-12</CreateDate>
     <Version>1.0.0</Version>
     <Install>
         <Adminmenu>
             <Customlink sort="1">
                 <Name>Massenversand</Name>
-                <Filename>bulk.php</Filename>
             </Customlink>
 
             <Settingslink sort="2">
