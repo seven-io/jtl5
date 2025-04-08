@@ -19,9 +19,9 @@
     "homepage": "https://www.seven.io",
     "name": "seven.io/jtl5",
     "require": {
-        "php": ">=7.3.0",
-        "sms77/api": "v2.5.0",
-        "ext-json": "*"
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "ext-curl": "*"
     },
     "support": {
         "email": "support@seven.io",

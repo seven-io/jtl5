@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @copyright 2021-2022 sms77 e.K. ; 2023-present seven communications GmbH & Co. KG
- * @link https://www.seven.io
- */
-
 namespace Plugin\seven_jtl5\lib\Hook;
 
 use JTL\Plugin\Helper;
@@ -12,9 +7,6 @@ use JTL\Plugin\PluginInterface;
 use JTL\Shop;
 use Plugin\seven_jtl5\lib\FormHelper;
 use Plugin\seven_jtl5\lib\MessageType;
-use Sms77\Api\Client;
-use Sms77\Api\Params\SmsParams;
-use Sms77\Api\Params\VoiceParams;
 
 abstract class AbstractHook {
     protected static function getPlugin(): PluginInterface {
@@ -41,28 +33,33 @@ abstract class AbstractHook {
             return;
         }
 
+        $payload = [
+            'text' => FormHelper::replacePlaceholders($text,
+                FormHelper::parsePlaceholders(self::trans($text)), $customer),
+            'to' => $phone
+        ];
         switch ((int)self::getPlugin()->getConfig()->getValue($setting)) {
             case MessageType::SMS:
-                $params = new SmsParams;
-                $request = function (Client $client, SmsParams $smsParams) {
-                    return $client->smsJson($smsParams);
-                };
+                $endpoint = 'sms';
                 break;
             case MessageType::VOICE:
-                $params = new VoiceParams;
-                $request = function (Client $client, VoiceParams $voiceParams) {
-                    return $client->voiceJson($voiceParams);
-                };
+                $endpoint = 'voice';
                 break;
             default:
                 return;
         }
 
-        $params->setTo($phone)->setText(
-            FormHelper::replacePlaceholders($text,
-                FormHelper::parsePlaceholders(self::trans($text)), $customer));
-
-        $logger->notice('seven.msg.sent.' . $setting,
-            (array)$request(FormHelper::initClient($apiKey), $params));
+        $ch = curl_init('https://gateway.seven.io/api/' . $endpoint);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: application/json',
+            'Content-type: application/json',
+            'SentWith: JTL',
+            'X-Api-Key: ' . $apiKey
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $logger->notice('seven.msg.sent.' . $setting, (array)$result);
     }
 }
