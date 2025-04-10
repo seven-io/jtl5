@@ -15,6 +15,12 @@ $option->nSort = 2;
 $options[] = $option;
 
 $option = new stdClass;
+$option->cName = __('RCS');
+$option->cWert = \Plugin\seven_jtl5\lib\MessageType::RCS;
+$option->nSort = 2;
+$options[] = $option;
+
+$option = new stdClass;
 $option->cName = __('Deaktiviert');
 $option->cWert = \Plugin\seven_jtl5\lib\MessageType::NONE;
 $option->nSort = 3;

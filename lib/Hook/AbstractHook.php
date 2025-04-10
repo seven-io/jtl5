@@ -41,6 +41,9 @@ abstract class AbstractHook {
             case MessageType::VOICE:
                 $endpoint = 'voice';
                 break;
+            case MessageType::RCS:
+                $endpoint = 'rcs/messages';
+                break;
             default:
                 return;
         }
