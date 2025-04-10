@@ -33,7 +33,7 @@ You need an API key from [seven](https://www.seven.io) - [register for free](htt
 > - After an order has been cancelled
 > - After an order has been marked as paid
 
-> Use property placeholders, e.g. {{cVorname}} resolves to the customers first name
+> Use property placeholders, e.g. {{cVorname}} resolves to the customers first name.
 
 ## Support
 

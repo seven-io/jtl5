@@ -12,6 +12,6 @@ class PostCancelOrder extends AbstractHook {
         $customer = $args_arr['oKunde'] ?? null;
         if (!$order || !$customer) return;
 
-        self::message($customer, 'text_on_cancel', 'onCancel');
+        self::message($customer, 'text_on_cancel', 'onCancel', $order);
     }
 }

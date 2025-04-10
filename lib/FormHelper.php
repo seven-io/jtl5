@@ -131,14 +131,13 @@ abstract class FormHelper {
         return '' === $customer->cMobil ? $customer->cTel : $customer->cMobil;
     }
 
-    public static function replacePlaceholders(
-        string $text, array $matches, object $obj): string {
+    public static function replacePlaceholders(string $text, array $matches, object $obj): string {
+        $cryptoService = Shop::Container()->getCryptoService();
         foreach ($matches as $match) {
             $key = trim($match, '{}');
 
             if (property_exists($obj, $key)) {
-                $replace = Shop::Container()->getCryptoService()
-                    ->decryptXTEA($obj->$key);
+                $replace = $cryptoService->decryptXTEA($obj->$key);
                 if ('' === $replace) $replace = $obj->$key;
                 $text = str_replace($match, trim($replace), $text);
                 $text = preg_replace('/\s+/', ' ', $text);

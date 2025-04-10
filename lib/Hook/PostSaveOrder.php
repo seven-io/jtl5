@@ -10,6 +10,6 @@ class PostSaveOrder extends AbstractHook {
         $order = $args_arr['oBestellung'] ?? null;
         if (!$order) return;
 
-        self::message(new Customer($order->kKunde), 'text_on_order', 'onOrder');
+        self::message(new Customer($order->kKunde), 'text_on_order', 'onOrder', $order);
     }
 }

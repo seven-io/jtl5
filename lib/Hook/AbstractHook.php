@@ -7,7 +7,7 @@ use JTL\Shop;
 use Plugin\seven_jtl5\lib\FormHelper;
 use Plugin\seven_jtl5\lib\MessageType;
 abstract class AbstractHook {
-    protected static function message(object $customer, string $text, string $setting): void {
+    protected static function message(object $customer, string $text, string $setting, object $order): void {
         $plugin = Helper::getPluginById('seven_jtl5');
         $cfg = $plugin->getConfig();
         $apiKey = $cfg->getValue('apiKey');
@@ -27,10 +27,13 @@ abstract class AbstractHook {
 
         $translatedText = $localization->getTranslation($text);
         $matches = FormHelper::parsePlaceholders($translatedText);
+        $payloadText = FormHelper::replacePlaceholders($translatedText, $matches, $customer);
+        $payloadText = FormHelper::replacePlaceholders($payloadText, $matches, $order);
         $payload = [
-            'text' => FormHelper::replacePlaceholders($translatedText, $matches, $customer),
+            'text' => $payloadText,
             'to' => $phone
         ];
+
         switch ((int)$cfg->getValue($setting)) {
             case MessageType::SMS:
                 $endpoint = 'sms';
