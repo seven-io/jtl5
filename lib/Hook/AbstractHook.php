@@ -3,42 +3,35 @@
 namespace Plugin\seven_jtl5\lib\Hook;
 
 use JTL\Plugin\Helper;
-use JTL\Plugin\PluginInterface;
 use JTL\Shop;
 use Plugin\seven_jtl5\lib\FormHelper;
 use Plugin\seven_jtl5\lib\MessageType;
-
 abstract class AbstractHook {
-    protected static function getPlugin(): PluginInterface {
-        return Helper::getPluginById('seven_jtl5');
-    }
-
-    protected static function trans(string $key, string $lang = null): ?string {
-        return self::getPlugin()->getLocalization()->getTranslation($key, $lang);
-    }
-
-    protected static function message(
-        object $customer, string $text, string $setting): void {
-        $apiKey = self::getPlugin()->getConfig()->getValue('apiKey');
+    protected static function message(object $customer, string $text, string $setting): void {
+        $plugin = Helper::getPluginById('seven_jtl5');
+        $cfg = $plugin->getConfig();
+        $apiKey = $cfg->getValue('apiKey');
+        $localization = $plugin->getLocalization();
         $logger = Shop::Container()->getLogService();
 
         if (!$apiKey) {
-            $logger->notice('seven.missing.apiKey.for.sending.msg.' . $setting);
+            $logger->warning('seven.missing.apiKey.for.sending.msg.' . $setting);
             return;
         }
 
         $phone = FormHelper::getCustomerPhone($customer);
         if ('' === $phone) {
-            $logger->notice('seven.missing.phone.for.sending.msg.' . $setting);
+            $logger->warning('seven.missing.phone.for.sending.msg.' . $setting);
             return;
         }
 
+        $translatedText = $localization->getTranslation($text);
+        $matches = FormHelper::parsePlaceholders($translatedText);
         $payload = [
-            'text' => FormHelper::replacePlaceholders($text,
-                FormHelper::parsePlaceholders(self::trans($text)), $customer),
+            'text' => FormHelper::replacePlaceholders($translatedText, $matches, $customer),
             'to' => $phone
         ];
-        switch ((int)self::getPlugin()->getConfig()->getValue($setting)) {
+        switch ((int)$cfg->getValue($setting)) {
             case MessageType::SMS:
                 $endpoint = 'sms';
                 break;

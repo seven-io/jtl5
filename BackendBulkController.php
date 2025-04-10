@@ -42,8 +42,6 @@ class BackendBulkController extends AbstractBackendController
 
         if ($tab === 'Massenversand') {
             if ($request->getMethod() === 'POST' && ($body['Setting'] ?? '') !== '1' && Form::validateToken()) {
-                //die(var_dump($request->getParsedBody()));
-
                 $apiKey = FormHelper::getApiKey();
 
                 if ('' === ($apiKey ?: '')) {
@@ -65,9 +63,8 @@ class BackendBulkController extends AbstractBackendController
         $smarty->assign('filterLanguages', LanguageHelper::getAllLanguages());
         $smarty->assign('sessionToken', Shop::getAdminSessionToken());
 
-        $content = $smarty->fetch($adminPath . '/templates/bulk.tpl');
         $res = (new Response())->withStatus(200);
-        $res->getBody()->write($content);
+        $res->getBody()->write($smarty->fetch($adminPath . '/templates/bulk.tpl'));
         return $res;
     }
 }

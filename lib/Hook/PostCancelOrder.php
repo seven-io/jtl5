@@ -3,10 +3,8 @@
 namespace Plugin\seven_jtl5\lib\Hook;
 
 use Exception;
-
 class PostCancelOrder extends AbstractHook {
     /**
-     * @param array $args_arr
      * @throws Exception
      */
     public static function execute(array &$args_arr): void {

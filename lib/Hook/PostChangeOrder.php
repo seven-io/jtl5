@@ -3,10 +3,8 @@
 use Exception;
 use JTL\Checkout\Bestellung;
 use JTL\Customer\Customer;
-
 class PostChangeOrder extends AbstractHook {
     /**
-     * @param array $args_arr
      * @throws Exception
      */
     public static function onShipping(array &$args_arr): void {
@@ -15,7 +13,6 @@ class PostChangeOrder extends AbstractHook {
     }
 
     /**
-     * @param array $args_arr
      * @throws Exception
      */
     public static function onPartialShipping(array &$args_arr): void {
@@ -24,11 +21,6 @@ class PostChangeOrder extends AbstractHook {
             self::message($customer, 'text_on_partial_shipping', 'onPartialShipping');
     }
 
-    /**
-     * @param array $args_arr
-     * @param int $status
-     * @return object|null
-     */
     private static function isPassingPreChecks(array $args_arr, int $status): ?object {
         /** @var Bestellung $oldOrder */
         $oldOrder = $args_arr['oBestellungAlt'] ?? null;
@@ -44,7 +36,6 @@ class PostChangeOrder extends AbstractHook {
     }
 
     /**
-     * @param array $args_arr
      * @throws Exception
      */
     public static function onPayment(array &$args_arr): void {

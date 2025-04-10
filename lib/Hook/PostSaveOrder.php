@@ -2,10 +2,8 @@
 
 use Exception;
 use JTL\Customer\Customer;
-
 class PostSaveOrder extends AbstractHook {
     /**
-     * @param array $args_arr
      * @throws Exception
      */
     public static function execute(array &$args_arr): void {
