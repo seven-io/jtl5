@@ -19,6 +19,9 @@ abstract class FormHelper {
         foreach ($params as $p) {
             try {
                 switch ($msgType) {
+                    case 'rcs':
+                        $endpoint = 'rcs/messages';
+                        break;
                     case 'sms':
                         $endpoint = 'sms';
                         break;
@@ -26,7 +29,7 @@ abstract class FormHelper {
                         $endpoint = 'voice';
                         break;
                     default:
-                        return [];  // TODO: alert or whatever
+                        return [];
                 }
 
                 $ch = curl_init('https://gateway.seven.io/api/' . $endpoint);
