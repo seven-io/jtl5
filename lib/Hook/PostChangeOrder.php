@@ -55,7 +55,12 @@ class PostChangeOrder extends AbstractHook {
             return null;
         }
 
-        return $status === $order->cStatus ? [$customer, $order] : null;
+        if ($status !== $order->cStatus) {
+            $logger->warning('seven hook not passing pre checks as the status does not match: ' . $status, $args_arr);
+            return null;
+        }
+
+        return [$customer, $order];
     }
 
     /**

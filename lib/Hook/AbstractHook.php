@@ -14,6 +14,8 @@ abstract class AbstractHook {
         $localization = $plugin->getLocalization();
         $logger = Shop::Container()->getLogService();
 
+        $logger->info('initializing seven hook: ' . $setting);
+
         if (!$apiKey) {
             $logger->warning('seven.missing.apiKey.for.sending.msg.' . $setting);
             return;
