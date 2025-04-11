@@ -6,6 +6,7 @@ use JTL\Plugin\Helper;
 use JTL\Shop;
 use Plugin\seven_jtl5\lib\FormHelper;
 use Plugin\seven_jtl5\lib\MessageType;
+
 abstract class AbstractHook {
     protected static function message(object $customer, string $text, string $setting, object $order): void {
         $plugin = Helper::getPluginById('seven_jtl5');
@@ -14,7 +15,7 @@ abstract class AbstractHook {
         $localization = $plugin->getLocalization();
         $logger = Shop::Container()->getLogService();
 
-        $logger->info('initializing seven hook: ' . $setting);
+        $logger->info('initializing seven hook: ' . $setting . ' with text ' . $text);
 
         if (!$apiKey) {
             $logger->warning('seven.missing.apiKey.for.sending.msg.' . $setting);

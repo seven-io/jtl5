@@ -12,7 +12,7 @@ class PostChangeOrder extends AbstractHook {
     public static function onShipping(array $args_arr): void {
         $data = self::isPassingPreChecks($args_arr, BESTELLUNG_STATUS_VERSANDT);
         if ($data === null) return;
-        self::message($data[0], 'text_on_shipping', 'onShipping', $data[1]);
+        self::message($data[0], 'text_on_shipment', 'onShipping', $data[1]);
     }
 
     /**
@@ -21,7 +21,7 @@ class PostChangeOrder extends AbstractHook {
     public static function onPartialShipping(array $args_arr): void {
         $data = self::isPassingPreChecks($args_arr, BESTELLUNG_STATUS_TEILVERSANDT);
         if ($data === null) return;
-        self::message($data[0], 'text_on_partial_shipping', 'onPartialShipping', $data[1]);
+        self::message($data[0], 'text_on_partial_shipment', 'onPartialShipping', $data[1]);
     }
 
     private static function isPassingPreChecks(array $args_arr, int $status): ?array {
@@ -55,8 +55,9 @@ class PostChangeOrder extends AbstractHook {
             return null;
         }
 
-        if ($status !== $order->cStatus) {
-            $logger->warning('seven hook not passing pre checks as the status does not match: ' . $status, $args_arr);
+        if ($order->cStatus !== null && $status !== $order->cStatus) {
+            $logger->warning('seven hook not passing pre checks as the status does not match: '
+                . $status . ' oldStatus: ' . $oldOrder->cStatus . ' currentStatus: ' . $order->cStatus, $args_arr);
             return null;
         }
 
