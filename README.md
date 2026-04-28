@@ -1,42 +1,58 @@
-<img src="https://www.seven.io/wp-content/uploads/Logo.svg" width="250" />
+<p align="center">
+  <img src="https://www.seven.io/wp-content/uploads/Logo.svg" width="250" alt="seven logo" />
+</p>
 
+<h1 align="center">seven SMS for JTL-Shop 5</h1>
 
-# JTL-Shop 5.x Plugin
-*You can download the latest version [here](https://github.com/seven-io/jtl5) for free.*
+<p align="center">
+  Bulk and event-based SMS / text-to-speech for <a href="https://www.jtl-software.de/produkte/jtl-shop">JTL-Shop 5</a> via the seven gateway.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-teal.svg" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/JTL--Shop-5.x-blue" alt="JTL-Shop 5.x" />
+  <img src="https://img.shields.io/badge/PHP-7.4%2B-purple" alt="PHP 7.4+" />
+</p>
+
+---
+
+## Features
+
+- **Bulk SMS / Voice** - Reach customers in one go, filtered by *Active*, *Customer Group* or *Language*
+- **Event-Based Dispatch** - Auto-fire on:
+  - New order
+  - Order shipped
+  - Order partially shipped
+  - Order cancelled
+  - Order paid
+- **Property Placeholders** - Reference customer fields in templates, e.g. `{{cVorname}}` resolves to the customer's first name
 
 ## Prerequisites
-You need an API key from [seven](https://www.seven.io) - [register for free](https://app.seven.io/signup?create_account).
+
+- [JTL-Shop](https://www.jtl-software.de/produkte/jtl-shop) 5.x
+- A [seven account](https://www.seven.io/) with API key ([How to get your API key](https://help.seven.io/en/developer/where-do-i-find-my-api-key))
 
 ## Installation
-1. Download the latest archive from [GitHub](https://github.com/seven-io/jtl5/releases/latest/download/seven_jtl5.zip)
-2. Go to `Plugins->Plugin Manager->Upload` and select the archive
-3. Activate the plugin in the tab `Deactivated`
-4. Go to `Installed plugins->seven` and fill in your API key
 
-## Functionalities
-### Bulk messaging
-> Send [SMS](https://www.seven.io/en/products/send-sms/) or make [text-to-speech calls](https://www.seven.io/en/products/voice/) to your customers.
-> 
-> **Filter by:**
-> - Limit to active/inactive
-> - Limit by customer group
-> - Limit by customer language
+1. Download the [latest archive](https://github.com/seven-io/jtl5/releases/latest/download/seven_jtl5.zip).
+2. In the JTL-Shop admin go to **Plugins > Plugin Manager > Upload** and select the archive.
+3. Open the **Deactivated** tab and click **Activate** on *seven*.
+4. Open **Installed plugins > seven** and paste your seven API key.
 
+## Usage
 
-### Event driven SMS / text-to-speech calls
-> Send [SMS](https://www.seven.io/en/products/send-sms/) or make [text-to-speech calls](https://www.seven.io/en/products/voice/) to the customer on certain events.
->
-> **Events:**
-> - After a new order has been placed
-> - After an order has been marked as shipped
-> - After an order has been marked as partially shipped
-> - After an order has been cancelled
-> - After an order has been marked as paid
+### Bulk Messaging
 
-> Use property placeholders, e.g. {{cVorname}} resolves to the customers first name.
+Open the plugin's *Bulk Messaging* tab, compose your SMS or voice message, apply filters and send.
+
+### Event-Based Templates
+
+Open the *Templates* tab, pick the event, write the template body using `{{cVorname}}` and other JTL customer-property placeholders, and save.
 
 ## Support
 
-Need help? Feel free to [contact us](https://www.seven.io/en/company/contact/).
+Need help? Feel free to [contact us](https://www.seven.io/en/company/contact/) or [open an issue](https://github.com/seven-io/jtl5/issues).
 
-[![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
+## License
+
+[MIT](LICENSE)
